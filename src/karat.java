@@ -1,4 +1,5 @@
 
+import java.lang.*;
 import java.util.*;
 
 /*
@@ -76,6 +77,23 @@ public class karat {
             }
             System.out.println();
         }
+    }
+
+    public BigInteger karatsuba(BigInteger bi, BigInteger bi2) {
+        if ((bi.length == 1) && (bi2.length == 1))
+	    return new BigInteger(Integer.toString(bi.digit[0] * bi.digit[0]));
+        int len = Math.max(bi.length,bi2.length);
+	len = len / 2;
+        BigInteger bi_low = bi.subInt();
+	BigInteger bi_high = bi.subInt();
+        BigInteger bi2_low = bi2.subInt();
+	BigInteger bi2_high = bi2.subInt();
+	BigInteger ret1 = karatsuba(bi_low,bi2_low);
+        BigInteger ret2 = karatsuba(bi2_high,bi2_high);
+	bi_low.add(bi_high);
+	bi2_low.add(bi2_high);
+	BigInteger ret3 = karatsuba(bi_low,bi2_low);
+	BigInteger ret = concatenate(
     }
     
     public static void main(String[] args) {
